@@ -34,7 +34,7 @@
         //echo "Wrong email or password.";
     }else{
         $row=mysqli_fetch_array($user_authentication_result);
-        $_SESSION['email']=$email;
+        $_SESSION['uname']=$uname;
         $_SESSION['id']=$row['id'];  //user id
         header('location: products.php');
     }
