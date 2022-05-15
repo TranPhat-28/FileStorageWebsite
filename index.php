@@ -37,7 +37,7 @@ session_start();
                    <div class="col-xs-4">
                        <div  class="thumbnail">
                            <a href="login.php">
-                                <img src="img/camera.jpg" alt="Pic1">
+                                <img src="img/option1.jpg" alt="Pic1">
                            </a>
                            <center>
                                 <div class="caption">
@@ -50,7 +50,7 @@ session_start();
                    <div class="col-xs-4">
                        <div class="thumbnail">
                            <a href="login.php">
-                               <img src="img/watch.jpg" alt="Pic2">
+                               <img src="img/option2.jpg" alt="Pic2">
                            </a>
                            <center>
                                 <div class="caption">
@@ -63,7 +63,7 @@ session_start();
                    <div class="col-xs-4">
                        <div class="thumbnail">
                            <a href="login.php">
-                               <img src="img/shirt.jpg" alt="Pic3">
+                               <img src="img/option3.jpg" alt="Pic3">
                            </a>
                            <center>
                                <div class="caption">
