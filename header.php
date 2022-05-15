@@ -9,7 +9,7 @@
 			<?php
 			if(isset($_SESSION['uname'])){
 			?>
-                       	<a href="products.php" class="navbar-brand">Online storage</a>
+                       	<a href="repo.php" class="navbar-brand">Online storage</a>
 			<?php
 			}else{
 			?>

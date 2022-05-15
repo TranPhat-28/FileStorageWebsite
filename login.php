@@ -2,7 +2,7 @@
     require 'connection.php';
     session_start();
     if(isset($_SESSION['uname'])){
-	header('location: products.php');
+	header('location: repo.php');
     }
 ?>
 <!DOCTYPE html>
