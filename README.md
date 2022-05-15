@@ -1,4 +1,4 @@
-# FileStorageWebsite
+# SimpleFileStorageWebsite
 A simple online website where you can store you document.
 
 Build with LAMP
