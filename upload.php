@@ -33,34 +33,34 @@
                             <div class="panel-heading">
                                 <h3>Upload a new file</h3>
                             </div>
+
                             <div class="panel-body">
-                                <div style="width:100%; margin:5px;" align="left">
-                                    <form action="HandlingUP.php" method="post" enctype="multipart/form-data">
-					<div class="form-group">
-						<input name="upload_file" type="file" required/>
-					</div>
-                                        <div class="form-group">
-                                        	<label>Description: </label>
-                                        	<input type="text" name="desc" hint="Short description..." required style="width:100%"></input>
-                                    	</div>
-                                        <div class="form-group">
-						<label>Owner: </label>
-		                     			<?php 
-		                        			echo $_SESSION['uname'];
+                                <form action="HandlingUP.php" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+						                <input name="upload_file" type="file" required/>
+					                </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="desc" placeholder="Short description..." required>
+                                    </div>
+                                    <div class="form-group">
+						                    <label>
+                                                Owner:
+                                            </label>
+		                     			    <?php 
+		                        			    echo $_SESSION['uname'];
 		                                	?> 
-		                        </div>
-                                        <div class="form-group">
-                                        	<input type="submit" value="Upload" class="btn btn-primary" />
-                                        </div>
-                                    </form>
-                                </div>
+		                            </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Upload" class="btn btn-primary">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <br><br><br>
-           <footer class="footer">
+            <footer class="footer">
                <div class="container">
                <center>
                    <p>Online document storage website</p>
