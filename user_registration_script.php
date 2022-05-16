@@ -49,6 +49,12 @@
         //The mysqli_insert_id() function returns the id (generated with AUTO_INCREMENT) used in the last query.
         $_SESSION['id']=mysqli_insert_id($con); 
         //header('location: repo.php');  //for redirecting
+	//Create a folder with the newly created username
+	chdir("userrepo");
+	if(!mkdir($uname)) {
+    		print_r(error_get_last());
+	}
+//	mkdir("../userrepo/".$uname, 0777, true);
         ?>
         <meta http-equiv="refresh" content="3;url=repo.php" />
         <?php
