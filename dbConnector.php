@@ -11,7 +11,7 @@ class DbConnector {
         	$host = 'localhost';
         	$db = 'teamproject';
         	$user = 'root';
-        	$pass = 'mynewpassword';
+        	$pass = 'root';
 		echo "auth success";
 
         	// Connect to the database
