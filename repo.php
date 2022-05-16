@@ -1,6 +1,6 @@
 <?php
     session_start();
-    //require 'check_if_added.php';
+    require 'connection.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,13 +29,7 @@
                 </div>
             </div>
             <div class="container">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                    </div>
-
-                    <div class="col-md-3 col-sm-6">
-                    </div>
-                </div>
+                
             </div>
 
            <footer class="footer">
