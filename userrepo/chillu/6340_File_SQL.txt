@@ -1,0 +1,13 @@
+// Create "Teamproject" database
+CREATE DATABASE teamproject;
+
+// Create "Users" table
+CREATE TABLE users (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(30) NOT NULL,
+password VARCHAR(255) NOT NULL,
+displayname VARCHAR(30) NOT NULL
+)
+
+// Add default user "admin" to table
+INSERT INTO TABLE users (username, password, displayname) VALUES ("admin", "admin", "Administrator");

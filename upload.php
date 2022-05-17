@@ -37,8 +37,8 @@
                             <div class="panel-body">
                                 <form action="HandlingUP.php" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
-						                <input name="upload_file" type="file" required/>
-					                </div>
+					<input name="uploaded_file" type="file" required/>
+				    </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="desc" placeholder="Short description..." required>
                                     </div>
