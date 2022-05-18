@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Your repository</title>
+        <title>Search</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- latest compiled and minified CSS -->
@@ -27,23 +27,36 @@
             ?>
             <div class="container">
                 <div class="jumbotron">
-                    <h1>Welcome back!</h1>
-                    <p>Here are all of your documents.</p>
+                    <h3>Search file</h3>
+                    <p>Input file name to search.</p>
+		    <input id="inputbox" type="text" placeholder="Filename"></input>
+		    <button onClick="getFile()" class="btn btn-primary">Search</button>
                 </div>
             </div>
             <div class="container">
                 <ul class="list-group">
-			<li class="list-group-item" style="font-weight:bold">Filename</li>
-			<?php
-				$current=$_SESSION['uname'];
-				$file_list_query="select * from up_files where fuplder='$current'";
-				$query_result=mysqli_query($con, $file_list_query) or die(mysqli_error($con));
-				$rows_fetched=mysqli_num_rows($query_result);
-				// Dynamically create li items
-				foreach($query_result as $row){ ?>
-				<li class="list-group-item" style="cursor:pointer" onClick=selectedFile(this.innerHTML); id=<?php $row['fname'] ?> ><?php echo $row['fname'] ?></li>
-				<?php } ?>
-			<li class="list-group-item" style="text-align:right">Total: <?php echo $rows_fetched ?></li>
+			<li class="list-group-item" style="font-weight:bold">Results</li>
+			<?php 
+			if (!($_GET['filename'])){
+			?>
+			<li class="list-group-item">...</li>
+			<?php } 
+			else { 
+				$fname=$_GET['filename'];
+				$stmt="select * from up_files where fname='$fname'";
+				$query=mysqli_query($con, $stmt);
+				$rows_fetched=mysqli_num_rows($query);
+				if ($rows_fetched==0){
+			?>
+			<li class="list-group-item">No result</li>
+			<?php }
+			else { 
+				$json=mysqli_fetch_all($query, MYSQLI_ASSOC);
+				foreach($json as $row){
+				?>
+				<li class="list-group-item" style="cursor:pointer" onClick="viewFile(this.innerHTML)"><?php echo $row['fname'] ?> (Owner: <?php echo $row['fuplder']?>)</li>
+			<?php }}} ?>
+			<li class="list-group-item" style="text-align:right">Total: <?php $row_fetched ?></li>
 		</ul>
             </div>
 
@@ -58,10 +71,19 @@
     </body>
 
    <script type="text/javascript">
-	function selectedFile(input){
-		//console.log(input);
-		let loc = "detail.php?filename=" + input;
+	function getFile(){
+		let elem = document.getElementById("inputbox");
+		let input = elem.value;
+		
+		let loc = "search.php?filename=" + input;
 		window.location.href=loc;
+	}
+
+	function viewFile(input){
+		let arr = input.slice(0, -1).split(' (Owner: ');
+		let loc = "detail.php?act=view&&filename=" + arr[0] + "&&uploader=" + arr[1];
+		window.location.href=loc;
+		
 	}
    </script>
 </html>

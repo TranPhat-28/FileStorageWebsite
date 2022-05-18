@@ -70,6 +70,7 @@
         		//Attempt to move the uploaded file to it's new place
         		if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'],$newname))) {
             		//successful upload
+				echo "<script>alert('File successfully uploaded!');</script>";
 				echo "quas";
 				?>
         			<script> 
@@ -88,6 +89,11 @@
         					session_write_close();
         					header("location: upload.php");
         				exit();}    
+					?>
+					<script>
+						window.alert("File uploaded!");
+					</script>
+					<?php
         			}else {
         				$errmsg_arr[] = 'Record was not saved in the database but file was uploaded';
         				$errflag = true;
