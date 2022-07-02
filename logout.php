@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body>
-        <div>
+        <div style="background-image: url(https://t3.ftcdn.net/jpg/04/06/60/72/360_F_406607245_daS9yMQ9g8MMZz3XWf2LVXxFy5cAdLQ7.jpg); background-size: cover; height: 100vh">
             <?php
                 require 'header.php';
             ?>

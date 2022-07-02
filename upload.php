@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body>
-        <div>
+        <div style="background-image: url(https://t3.ftcdn.net/jpg/04/06/60/72/360_F_406607245_daS9yMQ9g8MMZz3XWf2LVXxFy5cAdLQ7.jpg); background-size: cover; height: 100vh">
             <?php
                 require 'header.php';
             ?>
@@ -43,13 +43,18 @@
                                         <input type="text" class="form-control" name="desc" placeholder="Short description..." required>
                                     </div>
                                     <div class="form-group">
-						                    <label>
-                                                Owner:
-                                            </label>
-		                     			    <?php 
-		                        			    echo $_SESSION['uname'];
-		                                	?> 
-		                            </div>
+					 <label>Owner: </label>
+		                     		<?php 
+		                        		echo $_SESSION['uname'];
+		                                ?> 
+		                    </div>
+				    <div class="form-group">
+					<label>File sharing:</label>
+					<input type="radio" id="selection1" name="mode" value="public" style="margin-left: 3rem" checked="checked">
+					<label for="selection1">Public</label>
+					<input type="radio" id="selection2" name="mode" value="private" style="margin-left: 3rem">
+					<label for="selection2">Private</label>
+				    </div>
                                     <div class="form-group">
                                         <input type="submit" value="Upload" class="btn btn-primary">
                                     </div>

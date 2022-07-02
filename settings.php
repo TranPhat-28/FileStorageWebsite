@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body>
-        <div>
+        <div style="background-image: url(https://t3.ftcdn.net/jpg/04/06/60/72/360_F_406607245_daS9yMQ9g8MMZz3XWf2LVXxFy5cAdLQ7.jpg); background-size: cover; height: 100vh">
             <?php
                 require 'header.php';
             ?>
@@ -30,8 +30,7 @@
                 <div class="row">
                     <div class="col-xs-4 col-xs-offset-4">
                         <h1>Change Password</h1>
-			<form method="post" action="repo.php">
-                        //<form method="post" action="setting_script.php">
+                        <form method="post" action="setting_script.php">
                             <div class="form-group">
                                 <input type="password" class="form-control" name="oldPassword" placeholder="Old Password">
                             </div>

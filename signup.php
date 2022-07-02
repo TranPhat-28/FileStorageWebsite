@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body>
-        <div>
+        <div style="background-image: url(https://t3.ftcdn.net/jpg/04/06/60/72/360_F_406607245_daS9yMQ9g8MMZz3XWf2LVXxFy5cAdLQ7.jpg); background-size: cover; height: 100vh">
             <?php
                 require 'header.php';
             ?>
@@ -33,13 +33,13 @@
                         <h1><b>SIGN UP</b></h1>
                         <form method="post" action="user_registration_script.php">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="uname" placeholder="Username" required="true">
+                                <input type="text" class="form-control" name="uname" placeholder="Username" pattern="[A-Za-z0-9]{1,20}" title="Username must be a-z A-Z 0-9 and < 20 letters" required="true">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="password" placeholder="Password(min. 6 characters)" required="true" pattern=".{6,}">
                             </div>
                             <div class="form-group"> 
-                                <input type="text" class="form-control" name="displayname" placeholder="Display name" required="true">
+                                <input type="text" class="form-control" name="displayname" placeholder="Display name" pattern="[A-Za-z0-9 ]{1,30}" title="Displayname must be a-z A-Z 0-9 space and < 30 letters" required="true">
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Sign Up">

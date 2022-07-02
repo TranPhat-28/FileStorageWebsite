@@ -2,34 +2,29 @@
     require 'connection.php';
     session_start();
     $uname=$_POST['uname'];
-    $password=$_POST['password'];
+    //var_dump($uname);
+    $uname=mysqli_real_escape_string($con,$uname);
+    //var_dump($uname);
+    $uname=addslashes($uname);
+    //var_dump($uname);
+    $uname=htmlspecialchars($uname);
+    //var_dump($uname);
+
+    $password=mysqli_real_escape_string($con,$_POST['password']);
+    $password=$password + "3boyPCP";
+    $password=md5($password);
+
     $displayname=mysqli_real_escape_string($con,$_POST['displayname']);
-    
-    /*$email=mysqli_real_escape_string($con,$_POST['email']);
-    $regex_email="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,3})$/";
-    if(!preg_match($regex_email,$email)){
-        echo "Incorrect email. Redirecting you back to registration page...";
-        ?>
-        <meta http-equiv="refresh" content="2;url=signup.php" />
-        <?php
-    }
-    $password=md5(md5(mysqli_real_escape_string($con,$_POST['password'])));
-    if(strlen($password)<6){
-        echo "Password should have atleast 6 characters. Redirecting you back to registration page...";
-        ?>
-        <meta http-equiv="refresh" content="2;url=signup.php" />
-        <?php
-    }
-    $contact=$_POST['contact'];
-    $city=mysqli_real_escape_string($con,$_POST['city']);
-    $address=mysqli_real_escape_string($con,$_POST['address']);
-*/
+    $displayname=addslashes($displayname);
+    $displayname=htmlspecialchars($displayname);
+
     $duplicate_user_query="select id from users where username='$uname'";
     $duplicate_user_result=mysqli_query($con,$duplicate_user_query) or die(mysqli_error($con));
     $rows_fetched=mysqli_num_rows($duplicate_user_result);
     if($rows_fetched>0){
         //duplicate registration
         //header('location: signup.php');
+	var_dump($uname);
         ?>
         <script>
             window.alert("Username existed! Please use another username...");

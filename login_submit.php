@@ -2,21 +2,9 @@
     require 'connection.php';
     session_start();
     $uname=mysqli_real_escape_string($con,$_POST['uname']);
-    $password=$_POST['password'];
-    /*$regex_email="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,3})$/";
-    if(!preg_match($regex_email,$email)){
-        echo "Incorrect email. Redirecting you back to login page...";
-        ?>
-        <meta http-equiv="refresh" content="2;url=login.php" />
-        <?php
-    }
-    $password=md5(md5(mysqli_real_escape_string($con,$_POST['password'])));
-    if(strlen($password)<6){
-        echo "Password should have atleast 6 characters. Redirecting you back to login page...";
-        ?>
-        <meta http-equiv="refresh" content="2;url=login.php" />
-        <?php
-    }*/
+    $password=mysqli_real_escape_string($con,$_POST['password']);
+    $password=$password + "3boyPCP";
+    $password=md5($password);
 
     $user_authentication_query="select id, displayname from users where username='$uname' and password='$password'";
     $user_authentication_result=mysqli_query($con,$user_authentication_query) or die(mysqli_error($con));

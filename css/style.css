@@ -8,8 +8,9 @@
     margin-bottom: 20px;
     text-align:center;
     color:#f8f8f8;
-    background:url(../img/intro-bg_1.jpg);
+    background:url(https://img.freepik.com/free-vector/people-library-flat-vector-illustration_74855-6607.jpg?t=st=1652871078~exp=1652871678~hmac=cb061f945ebdd81777e997272e7006b3f0894276ed6e611d962ede38b87fc4ec&w=1380);
     background-size:cover;
+    opacity: 0.9;
 }
 
 #bannerContent{
@@ -18,7 +19,7 @@
     padding-bottom:6%;
     margin-top:12%;
     margin-bottom:12%;
-    background-color:rgba(0,0,0,0.7);
+    background-color:rgba(0,0,0,0.95);
     max-width:660px;
 }
 
@@ -34,7 +35,7 @@ footer{
 html { 
     min-height:100%;
     position:relative;    
-} 
+}
 
 .footer { 
     position: absolute; 

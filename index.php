@@ -25,7 +25,7 @@ session_start();
                <div class="container">
                    <center>
                    <div id="bannerContent">
-                       <h1>We help with  your documents.</h1>
+                       <h1>We help store your documents.</h1>
                        <p>Create your online repository now.</p>
                        <a href="login.php" class="btn btn-danger">Join Now</a>
                    </div>

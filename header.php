@@ -24,8 +24,9 @@
                            <?php
                            if(isset($_SESSION['uname'])){
                            ?>
+			   <li><a href="search.php"><span class="glyphicon glyphicon-search"></span> Search File</a></li>
 			   <li><a href="upload.php"><span class="glyphicon glyphicon-file"></span> Upload File</a></li>
-                           <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+			   <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Setting</a></li> 
                            <li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                            <?php
                            }else{

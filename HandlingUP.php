@@ -2,10 +2,9 @@
     require 'connection.php';
     session_start();
     //Include database connection details
-   
-    $errmsg_arr = array();  
-    //Validation error flag
-    $errflag = false;   
+    if(!isset($_SESSION['uname'])){
+	 header('location:login.php'); $errflag = false;
+    }   
     //Function to sanitize values received from the form. Prevents SQL injection
     function clean($str, $con) {
         $str = @trim($str);
@@ -17,40 +16,45 @@
 	//var_dump($str1);
         return $str1;
     }
-   
-    //var_dump($con);
+
     //Sanitize the POST values
-    //var_dump(basename($_FILES['uploaded_file']['name']));
+
     $fname= clean(basename($_FILES['uploaded_file']['name']), $con);
-    //var_dump($fname);
-    //exit();
+
     $filedesc= clean($_POST['desc'], $con);
-    //var_dump($_POST['desc']);
-    //var_dump($fuplder);
+
     $fuplder=$_SESSION['uname'];
-    //$subject= clean($_POST['upname']);
-    //var_dump($fuplder);
+
+    $fmode=clean($_POST['mode'], $con);
+
     if($filedesc == '') {
-        $errmsg_arr[] = ' file discription is missing';
-        $errflag = true;
+        ?>
+	<script>
+		window.alert("file discription is missing");
+	</script>
+	<meta http-equiv="refresh" content="1;url=upload.php" />
+	<?php
     }
     if($fname == '') {
-        $errmsg_arr[] = ' file name is missing';
-        $errflag = true;
+        ?>
+	<script>
+		window.alert("file name is missing");
+	</script>
+	<meta http-equiv="refresh" content="1;url=upload.php" />
+	<?php
     }       
         
     if($_FILES['uploaded_file']['size'] >= 1048576*5) {
-        $errmsg_arr[] = 'file selected exceeds 5MB size limit';
-        $errflag = true;
+        ?>
+	<script>
+		window.alert("file selected exceeds 5MB size limit");
+	</script>
+	<meta http-equiv="refresh" content="1;url=upload.php" />
+	<?php
     }   
     
     //If there are input validations, redirect back to the registration form
-    if($errflag) {
-        $_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-        session_write_close();
-        header("location: upload.php");
-        exit();
-    }  
+
      //upload random name/number
      $rd2 = mt_rand(1000,9999)."_File"; 
      //var_dump($rd2); 
@@ -69,77 +73,80 @@
       		if (!file_exists($newname)) {
         		//Attempt to move the uploaded file to it's new place
         		if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'],$newname))) {
-            		//successful upload
-				echo "quas";
-				?>
-        			<script> 
-                			window.alert("It is done! The file has been saved!!!");
-        			</script>
-				<?php
-			//exit();
-        			$qry2 = "INSERT INTO up_files (fdesc,floc,fdatein,fname,fuplder) VALUES ('$filedesc','$newname',NOW(),'$fname','$fuplder')";    
-        			$result2 = mysqli_query($con, $qry2) or die(mysqli_error($con));
+				//Scan the file
+				$command = 'clamscan ' . $newname;
+				$out = '';
+				$int = -1;
+				exec($command, $out, $int);
 
-        			if ($result2){
-        				$errmsg_arr[] = 'Record was saved in the database and the file was uploaded';
-        				$errflag = true;    
-        				if($errflag) {
-        					$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-        					session_write_close();
-        					header("location: upload.php");
-        				exit();}    
-        			}else {
-        				$errmsg_arr[] = 'Record was not saved in the database but file was uploaded';
-        				$errflag = true;
-        				if($errflag) {
-        					$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-        					session_write_close();
-        					header("location: upload.php");
-			       			exit();}        
-        			}
+				if($int == 0){
+					// all good, code goes here uploads file as normal IE move to
+            				//successful upload
+        				$qry2 = "INSERT INTO up_files (fdesc,floc,fdatein,fname,fuplder,downloadCount,fmode) VALUES ('$filedesc','$newname',NOW(),'$fname','$fuplder',0, '$fmode')";    
+        				$result2 = mysqli_query($con, $qry2) or die(mysqli_error($con));
+
+        				if ($result2){
+        					?>
+						<script>
+					    		window.alert("Record was saved in the database and the file was uploaded");
+						</script>
+						<meta http-equiv="refresh" content="1;url=upload.php" />
+						<?php
+        				}else {
+			       			?>
+						<script>
+					    		window.alert("Record was not saved in the database but file was uploaded");
+						</script>
+						<meta http-equiv="refresh" content="1;url=upload.php" />
+						<?php    
+        				}
+				}
+				else{
+					unlink($newname);
+					?>					
+					<script>
+						window.alert("Threat found! Abort uploading...");
+					</script>
+					<meta http-equiv="refresh" content="1;url=upload.php" />
+					<?php
+				}
         		}else {
            		//unsuccessful upload
-           			echo "Error: A problem occurred during file upload!";
-        			$errmsg_arr[] = 'upload of file ' .$filename. ' was unsuccessful';
-        			$errflag = true;
-        			if($errflag) {
-        				$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-        				session_write_close();
-        				header("location: upload.php");
-        				exit();}
+	  		       	?>
+				<script>
+				    window.alert("A problem occurred during file upload! Upload file was unsuccessful");
+				</script>
+				<meta http-equiv="refresh" content="1;url=upload.php" />			
+				<?php
            		}
         	 } else {
          		//existing upload
-        		echo "Error: File ".$_FILES["uploaded_file"]["name"]." already exists";
-        		$errmsg_arr[] = 'Error: File >>'.$_FILES["uploaded_file"]["name"].'<< already exists';
-        		$errflag = true;
-       			if($errflag) {
-        			$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-        			session_write_close();
-        			header("location: upload.php");
-        		exit();}
+        		?>
+			<script>
+			    window.alert("File name is already exists");
+			</script>
+			<meta http-equiv="refresh" content="1;url=upload.php" />					
+			<?php
          	}
       	}else {
         	//wrong file upload
-     		echo "Error: Only .jpg images under 350Kb are accepted for upload";
-     		$errmsg_arr[] = 'Error: All file types except .exe file under 5 Mb are not accepted for upload';
-        	$errflag = true;
-        	if($errflag) {
-        		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-        		session_write_close();
-        		header("location: upload.php");
-        	exit();}
+
+		?>
+		<script>
+	 	       window.alert("Error: All file types except .exe file under 5 Mb are not accepted for upload");
+		</script>
+		<meta http-equiv="refresh" content="1;url=upload.php" />
+		<?php
     	}
     }else {
 	//no file to upload
-    	echo "Error: No file uploaded";
-      	$errmsg_arr[] = 'Error: No file uploaded';
-       	$errflag = true;
-       	if($errflag) {
-        	$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
-        	session_write_close();
-        	header("location: upload.php");
-        	exit();}
+	
+        ?>
+	<script>
+	        window.alert("Error: No file uploaded");
+	</script>
+	<meta http-equiv="refresh" content="1;url=upload.php" />
+	<?php
     }
     mysqli_close();
 ?>
