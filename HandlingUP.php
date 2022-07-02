@@ -82,6 +82,10 @@
 				if($int == 0){
 					// all good, code goes here uploads file as normal IE move to
             				//successful upload
+						if ($fmode != "public" && $fmode != "private")
+						{
+							$fmode = "public"
+						}
         				$qry2 = "INSERT INTO up_files (fdesc,floc,fdatein,fname,fuplder,downloadCount,fmode) VALUES ('$filedesc','$newname',NOW(),'$fname','$fuplder',0, '$fmode')";    
         				$result2 = mysqli_query($con, $qry2) or die(mysqli_error($con));
 
